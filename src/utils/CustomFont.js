@@ -10,4 +10,10 @@ export default StyleSheet.create({
   Medium_Montserrat: {
     fontFamily: 'Montserrat-Medium',
   },
+  Roboto_Reg: {
+    fontFamily: 'Roboto-Regular',
+  },
+  Roboto_Bol: {
+    fontFamily: 'Roboto-Bold',
+  },
 });
