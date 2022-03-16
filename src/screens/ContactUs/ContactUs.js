@@ -11,22 +11,20 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
-import {
-  LogoIcon,
-} from '../../../assets/svgs';
+import {LogoIcon} from '../../../assets/svgs';
 import CustomFont from '../../utils/CustomFont';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function MySurveys({navigation}) {
+export default function ContactUs({navigation}) {
   const newFittingHandler = () => {
     navigation.navigate('NewFittingWizard');
   };
 
   const DeleteAccHandler = () => {
-    navigation.navigate('DeleteAccount')
-  }
+    navigation.navigate('DeleteAccount');
+  };
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -44,65 +42,51 @@ export default function MySurveys({navigation}) {
             </View>
             <View style={styles.FContainer}>
               <Text style={[styles.AText, CustomFont.Roboto_Bol]}>
-                My Account
+                Contact us
               </Text>
               <View style={styles.BoxContainer}>
                 <View style={styles.InnerContainer}>
-                  <Text style={{flex: 2, color: '#000'}}>Company Name:</Text>
+                  <Text style={{flex: 2, color: '#000'}}>First name:</Text>
                   <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput>
-                      <Text>Petar’s Lighting Solutions</Text>
-                    </TextInput>
+                    <TextInput placeholder="Enter Your First name" />
                   </View>
                 </View>
                 <View style={styles.InnerContainer}>
-                  <Text style={{flex: 2, color: '#000'}}>Address:</Text>
+                  <Text style={{flex: 2, color: '#000'}}>Company:</Text>
                   <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput multiline={true}>
-                      <Text>49a Kilsheelan Clonmel, Clonmel</Text>
-                    </TextInput>
+                    <TextInput placeholder="Enter Your Company name" />
                   </View>
                 </View>
                 <View style={styles.InnerContainer}>
                   <Text style={{flex: 2, color: '#000'}}>E-Mail:</Text>
                   <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput keyboardType="email-address">
-                      <Text>petar3@gmail.com</Text>
-                    </TextInput>
+                    <TextInput
+                      keyboardType="email-address"
+                      placeholder="Enter Your E-Mail address"
+                    />
                   </View>
                 </View>
                 <View style={styles.InnerContainer}>
                   <Text style={{flex: 2, color: '#000'}}>Phone:</Text>
                   <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput keyboardType="phone-pad">
-                      <Text>+353 78 1984 983</Text>
-                    </TextInput>
+                    <TextInput
+                      keyboardType="phone-pad"
+                      placeholder="Enter Your Phone Number"
+                    />
                   </View>
                 </View>
                 <View style={styles.InnerContainer}>
-                  <Text style={{flex: 2, color: '#000'}}>Old Password:</Text>
+                  <Text style={{flex: 2, color: '#000'}}>Message:</Text>
                   <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput secureTextEntry={true}>
-                      <Text></Text>
-                    </TextInput>
+                    <TextInput
+                      multiline={true}
+                      placeholder="Please type your message here"
+                    />
                   </View>
-                </View>
-                <View style={styles.InnerContainer}>
-                  <Text style={{flex: 2, color: '#000'}}>New Password:</Text>
-                  <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput secureTextEntry={true}>
-                      <Text></Text>
-                    </TextInput>
-                  </View>
-                </View>
-                <View style={styles.DeleteAccContainer}>
-                  <TouchableOpacity onPress={DeleteAccHandler}>
-                    <Text style={{color: 'red'}}>Delete Account</Text>
-                  </TouchableOpacity>
                 </View>
                 <Button
-                  BtnName="Save"
-                  onPress={() => navigation.navigate('Home')}
+                  BtnName="Send"
+                  onPress={() => navigation.navigate('SendContactUsSuccess')}
                 />
               </View>
             </View>

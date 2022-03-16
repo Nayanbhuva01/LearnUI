@@ -20,6 +20,7 @@ import {
 } from '../../assets/svgs';
 import CustomFont from '../utils/CustomFont';
 import Button from '../component/Button';
+import {CommonActions} from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -31,6 +32,27 @@ export default function Home({navigation}) {
 
   const MyAccountHandler = () => {
     navigation.navigate('MyAccount');
+  };
+
+  const ContactHandler = () => {
+    navigation.navigate('ContactUs');
+  };
+
+  const CalcCarbonHandler = () => {
+    navigation.navigate('CalculateCarbonCredit');
+  };
+
+  const DialuxHandler = () => {
+    navigation.navigate('DialuxDesign');
+  };
+
+  const LogOutHandler = () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 1,
+        routes: [{name: 'Login'}],
+      }),
+    );
   };
   return (
     <View style={styles.container}>
@@ -70,13 +92,15 @@ export default function Home({navigation}) {
 
         <View style={styles.SContainer}>
           <View style={styles.Options}>
-            <TouchableOpacity style={styles.CalculateBtn}>
+            <TouchableOpacity
+              style={styles.CalculateBtn}
+              onPress={CalcCarbonHandler}>
               <CalcIcon />
               <Text style={[styles.CalculateTxt, CustomFont.Roboto_Reg]}>
                 Calculate Carbon Credit
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.DialuxBtn}>
+            <TouchableOpacity style={styles.DialuxBtn} onPress={DialuxHandler}>
               <DialuxIcon />
               <Text style={[styles.DialuxTxt, CustomFont.Roboto_Reg]}>
                 Dialux Design
@@ -92,7 +116,9 @@ export default function Home({navigation}) {
                 My Account
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.ContactBtn}>
+            <TouchableOpacity
+              style={styles.ContactBtn}
+              onPress={ContactHandler}>
               <ContectIcon />
               <Text style={[styles.ContectTxt, CustomFont.Roboto_Reg]}>
                 Contact Us
@@ -100,7 +126,7 @@ export default function Home({navigation}) {
             </TouchableOpacity>
           </View>
         </View>
-        <Button BtnName="Log Out" />
+        <Button BtnName="Log Out" onPress={LogOutHandler} />
       </ImageBackground>
     </View>
   );

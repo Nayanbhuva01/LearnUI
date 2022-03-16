@@ -37,13 +37,19 @@ import DeleteSurvey from './src/screens/MySurveys/DeleteSurvey';
 import SurveyDeleteSuccess from './src/screens/MySurveys/SurveyDeleteSuccess';
 import MySurveyBlank from './src/screens/MySurveys/MySurveyBlank';
 import MyAccount from './src/screens/MyAccount/MyAccount';
+import DeleteAccount from './src/screens/MyAccount/DeleteAccount';
+import DeleteAccSuccess from './src/screens/MyAccount/DeleteAccSuccess';
+import ContactUs from './src/screens/ContactUs/ContactUs';
+import SendContactUsSuccess from './src/screens/ContactUs/SendContactUsSuccess';
+import CalculateCarbonCredit from './src/screens/CalculateCarbonCredit/CalculateCarbonCredit';
+import DialuxDesign from './src/screens/DialuxDesign/DialuxDesign';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -217,6 +223,36 @@ const App = () => {
         <Stack.Screen
           name="MyAccount"
           component={MyAccount}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="DeleteAccount"
+          component={DeleteAccount}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="DeleteAccSuccess"
+          component={DeleteAccSuccess}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="ContactUs"
+          component={ContactUs}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SendContactUsSuccess"
+          component={SendContactUsSuccess}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="CalculateCarbonCredit"
+          component={CalculateCarbonCredit}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="DialuxDesign"
+          component={DialuxDesign}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

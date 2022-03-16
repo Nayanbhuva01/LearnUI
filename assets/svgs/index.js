@@ -22,6 +22,7 @@ import CameraIcon from './Camera.svg';
 import EditIcon from './Edit.svg';
 import SmileIcon from './Smyle.svg';
 import CameraPinkIcon from './CameraPink.svg';
+import SadBGIcon from './SadBG.svg';
 export {
   EllipseIcon,
   MailIcon,
@@ -47,4 +48,5 @@ export {
   EditIcon,
   SmileIcon,
   CameraPinkIcon,
+  SadBGIcon,
 };
