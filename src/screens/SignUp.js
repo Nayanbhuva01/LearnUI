@@ -20,6 +20,7 @@ import {
 } from '../../assets/svgs';
 import Button from '../component/Button';
 import Input from '../component/Input';
+import WithBackground from '../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -33,16 +34,14 @@ export default function SignUp({navigation}) {
     navigation.navigate('Login');
   };
   return (
-    <ImageBackground
-      source={require('../../assets/BG.png')}
-      style={styles.bgImage}>
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <ScrollView
-          contentContainerStyle={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingBottom: 30,
-          }}>
+    <WithBackground>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+        <View style={{alignItems: 'center'}}>
           <EllipseIcon style={styles.LogoContainer} />
 
           <View style={styles.middContainer}>
@@ -77,39 +76,26 @@ export default function SignUp({navigation}) {
               keyboardType="phone-pad"
             />
           </View>
-          <View style={styles.buttons}>
-            <Button BtnName="Next" onPress={NextHandler} />
+        </View>
+        <View style={styles.buttons}>
+          <Button BtnName="Next" onPress={NextHandler} />
 
-            <TouchableOpacity style={styles.Login} onPress={SignInHandler}>
-              <Text style={styles.TextA}>Already have account?</Text>
-              <Text style={styles.TextB}> Log In</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </TouchableWithoutFeedback>
-    </ImageBackground>
+          <TouchableOpacity style={styles.Login} onPress={SignInHandler}>
+            <Text style={styles.TextA}>Already have account?</Text>
+            <Text style={styles.TextB}> Log In</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    width: windowWidth * 1,
-  },
-
-  //Logo
   LogoContainer: {
+    marginTop: 30,
     marginBottom: 30,
-    marginTop: 20,
   },
 
-  //Company Registration
   middContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -125,10 +111,9 @@ const styles = StyleSheet.create({
     margin: 11,
   },
 
-  //Button
   buttons: {
-    marginTop: 40,
     alignItems: 'center',
+    marginBottom: 20,
   },
   Login: {
     flexDirection: 'row',

@@ -11,7 +11,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default Button = props => {
-  const {onPress, BtnName,btnStyle={}} = props;
+  const {onPress, BtnName, btnStyle = {}} = props;
   return (
     <View>
       <TouchableOpacity style={[styles.Login, btnStyle]} onPress={onPress}>
@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
   Login: {
     borderRadius: 50,
     backgroundColor: '#FD5086',
-    height: windowHeight * 0.08,
+    paddingTop: 20,
+    paddingBottom: 20,
     width: windowWidth * 0.9,
     alignItems: 'center',
     justifyContent: 'center',

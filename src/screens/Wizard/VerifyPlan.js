@@ -23,6 +23,9 @@ import CustomFont from '../../utils/CustomFont';
 import {Picker} from '@react-native-picker/picker';
 import Input from '../../component/Input';
 import Button from '../../component/Button';
+import WithBackground from '../../hoc/WithBackground';
+import LogoWithBar from '../../hoc/LogoWithBar';
+import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -49,136 +52,106 @@ export default function VerifyPlan({navigation}) {
     close();
   }, []);
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../../assets/BG.png')}
-        style={styles.BGImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <ScrollView
-            contentContainerStyle={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingBottom: 20,
-            }}>
-            <View style={styles.LogoBG}>
-              <LogoIcon style={styles.Logo} />
+    <WithBackground>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingBottom: 20,
+        }}>
+        <LogoWithBar />
+        <Text style={[styles.AText, CustomFont.Roboto_Bol]}>New Fitting</Text>
+        <View style={styles.FContainer}>
+          <View style={styles.InnContainer}>
+            <Text style={styles.labelTxt}>New Fitting Power:</Text>
+            <Picker
+              style={styles.picker}
+              ref={pickerRef}
+              selectedValue={power}
+              onValueChange={(itemValue, itemIndex) => setPower(itemValue)}>
+              <Picker.item label="60W" value="60w" />
+              <Picker.item label="90W" value="90w" />
+            </Picker>
+          </View>
+          <View style={styles.InnContainer}>
+            <Text style={styles.labelTxt}>Image:</Text>
+            <View style={{flex: 1}}>
+              <Image source={require('../../../assets/SMimage.png')} />
             </View>
-            <Text style={[styles.AText, CustomFont.Roboto_Bol]}>
-              New Fitting
-            </Text>
-            <View style={styles.FContainer}>
-              <View style={styles.InnContainer}>
-                <Text style={styles.labelTxt}>New Fitting Power:</Text>
-                <Picker
-                  style={styles.picker}
-                  ref={pickerRef}
-                  selectedValue={power}
-                  onValueChange={(itemValue, itemIndex) => setPower(itemValue)}>
-                  <Picker.item label="60W" value="60w" />
-                  <Picker.item label="90W" value="90w" />
-                </Picker>
-              </View>
-              <View style={styles.InnContainer}>
-                <Text style={styles.labelTxt}>Image:</Text>
-                <View style={{flex: 1}}>
-                  <Image source={require('../../../assets/SMimage.png')} />
-                </View>
-              </View>
-              <View style={styles.InnContainer}>
-                <Text style={styles.labelTxt}>Quantity:</Text>
-                <View
-                  style={{
-                    flex: 1,
-                    borderWidth: 1,
-                    borderColor: 'rgba(255, 255, 255, 0.2)',
-                    backgroundColor: '#EEEEEE',
-                  }}>
-                  <TextInput
-                    style={{textAlign: 'center'}}
-                    placeholder="5"
-                    placeholderTextColor={'#000'}
-                  />
-                </View>
-              </View>
+          </View>
+          <View style={styles.InnContainer}>
+            <Text style={styles.labelTxt}>Quantity:</Text>
+            <View
+              style={{
+                flex: 1,
+                borderWidth: 1,
+                borderColor: 'rgba(255, 255, 255, 0.2)',
+                backgroundColor: '#EEEEEE',
+              }}>
+              <TextInput
+                style={{textAlign: 'center'}}
+                placeholder="5"
+                placeholderTextColor={'#000'}
+              />
             </View>
-            <View style={{width: windowWidth * 0.8}}>
-              <View style={styles.InnContainer}>
-                <Text style={styles.outLabelTxt}>Fitting cost:</Text>
-                <View style={styles.outerInput}>
-                  <TextInput
-                    style={{textAlign: 'center', color: '#fff'}}
-                    placeholder="729.00"
-                    placeholderTextColor={'#fff'}
-                    keyboardType="number-pad"
-                  />
-                </View>
-                <Text style={styles.symbolTxt}>€</Text>
-              </View>
-              <View style={styles.InnContainer}>
-                <Text style={styles.outLabelTxt}>Labour Cost:</Text>
-                <View style={styles.outerInput}>
-                  <TextInput
-                    style={{textAlign: 'center', color: '#fff'}}
-                    placeholder="55.00"
-                    placeholderTextColor={'#fff'}
-                    keyboardType="number-pad"
-                  />
-                </View>
-                <Text style={styles.symbolTxt}>€</Text>
-              </View>
-              <View style={styles.InnContainer}>
-                <Text style={styles.outLabelTxt}>Accessories & Plan Cost:</Text>
-                <View style={styles.outerInput}>
-                  <TextInput
-                    style={{textAlign: 'center', color: '#fff'}}
-                    placeholder="55.00"
-                    placeholderTextColor={'#fff'}
-                    keyboardType="number-pad"
-                  />
-                </View>
-                <Text style={styles.symbolTxt}>€</Text>
-              </View>
+          </View>
+        </View>
+        <View style={{width: windowWidth * 0.8}}>
+          <View style={styles.InnContainer}>
+            <Text style={styles.outLabelTxt}>Fitting cost:</Text>
+            <View style={styles.outerInput}>
+              <TextInput
+                style={{textAlign: 'center', color: '#fff'}}
+                placeholder="729.00"
+                placeholderTextColor={'#fff'}
+                keyboardType="number-pad"
+              />
             </View>
-            <TouchableOpacity style={styles.verifyBtn}>
-              <Text style={styles.outLabelTxt}>Verified</Text>
-            </TouchableOpacity>
+            <Text style={styles.symbolTxt}>€</Text>
+          </View>
+          <View style={styles.InnContainer}>
+            <Text style={styles.outLabelTxt}>Labour Cost:</Text>
+            <View style={styles.outerInput}>
+              <TextInput
+                style={{textAlign: 'center', color: '#fff'}}
+                placeholder="55.00"
+                placeholderTextColor={'#fff'}
+                keyboardType="number-pad"
+              />
+            </View>
+            <Text style={styles.symbolTxt}>€</Text>
+          </View>
+          <View style={styles.InnContainer}>
+            <Text style={styles.outLabelTxt}>Accessories & Plan Cost:</Text>
+            <View style={styles.outerInput}>
+              <TextInput
+                style={{textAlign: 'center', color: '#fff'}}
+                placeholder="55.00"
+                placeholderTextColor={'#fff'}
+                keyboardType="number-pad"
+              />
+            </View>
+            <Text style={styles.symbolTxt}>€</Text>
+          </View>
+        </View>
+        <TouchableOpacity style={styles.verifyBtn}>
+          <Text style={styles.outLabelTxt}>Verified</Text>
+        </TouchableOpacity>
 
-            <Button BtnName="OK" onPress={OkHandler} />
-            <TouchableOpacity
-              style={styles.BackBtn}
-              onPress={() => navigation.navigate('Home')}>
-              <Text style={[styles.backTxt, CustomFont.Roboto_Reg]}>
-                Back to Home
-              </Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+        <Button BtnName="OK" onPress={OkHandler} />
+        <TouchableOpacity
+          style={styles.BackBtn}
+          onPress={() => navigation.navigate('Home')}>
+          <Text style={[styles.backTxt, CustomFont.Roboto_Reg]}>
+            Back to Home
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  BGImage: {
-    flex: 1,
-    alignItems: 'center',
-    width: windowWidth * 1,
-  },
-  LogoBG: {
-    backgroundColor: '#FD5086',
-    width: windowWidth * 1,
-    height: windowHeight * 0.16,
-    alignItems: 'center',
-  },
-  Logo: {
-    top: 20,
-  },
-
   FContainer: {
     backgroundColor: '#fff',
     width: windowWidth * 0.95,

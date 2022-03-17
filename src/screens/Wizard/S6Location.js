@@ -15,6 +15,7 @@ import Button from '../../component/Button';
 import {EllipseIcon, RightIcon, WrongIcon} from '../../../assets/svgs';
 import CustomFont from '../../utils/CustomFont';
 import Input from '../../component/Input';
+import WithBackground from '../../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -41,75 +42,61 @@ export default function S4OperatingTime({navigation}) {
   };
 
   return (
-    <ImageBackground
-      source={require('../../../assets/BG.png')}
-      style={styles.bgImage}>
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <KeyboardAvoidingView>
-          <View style={styles.subContainer}>
-            <View
-              style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '30%',
-              }}>
-              <View style={styles.LogoContainer}>
-                <EllipseIcon style={styles.Logo} />
-              </View>
-              <View style={styles.middContainer}>
-                <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
-                  Step 6. Location
-                </Text>
-                <View style={styles.messageContainer}>
-                  <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
-                    Please name Fitting Location (ex. Livingroom)
-                  </Text>
-                </View>
-              </View>
-              <Input
-                placeholder="Livingroom"
-                onChangeText={value => setLocation(value)}
-                onEndEditing={locationHandler}
-                isValid={isValidLocation}
-              />
-            </View>
-            <View style={styles.Buttons}>
-              <Button BtnName="Next" onPress={NextHandler} />
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Text
-                  style={[
-                    {
-                      color: '#fff',
-                      textDecorationLine: 'underline',
-                      marginTop: 10,
-                    },
-                    CustomFont.Roboto_Reg,
-                  ]}>
-                  Back
-                </Text>
-              </TouchableOpacity>
+    <WithBackground>
+      <View style={styles.subContainer}>
+        <View
+          style={{
+            alignItems: 'center',
+          }}>
+          <View style={styles.LogoContainer}>
+            <EllipseIcon style={styles.Logo} />
+          </View>
+          <View style={styles.middContainer}>
+            <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
+              Step 6. Location
+            </Text>
+            <View style={styles.messageContainer}>
+              <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
+                Please name Fitting Location (ex. Livingroom)
+              </Text>
             </View>
           </View>
-        </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
-    </ImageBackground>
+          <Input
+            placeholder="Livingroom"
+            onChangeText={value => setLocation(value)}
+            onEndEditing={locationHandler}
+            isValid={isValidLocation}
+          />
+        </View>
+        <View style={styles.Buttons}>
+          <Button BtnName="Next" onPress={NextHandler} />
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text
+              style={[
+                {
+                  color: '#fff',
+                  textDecorationLine: 'underline',
+                  marginTop: 10,
+                },
+                CustomFont.Roboto_Reg,
+              ]}>
+              Back
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  bgImage: {
+  subContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    width: windowWidth * 1,
-  },
-  subContainer: {
-    alignItems: 'center',
     justifyContent: 'space-between',
-    paddingBottom: 20,
   },
   LogoContainer: {
+    marginTop: 30,
     marginBottom: 30,
   },
 
@@ -134,6 +121,6 @@ const styles = StyleSheet.create({
 
   Buttons: {
     alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: 10,
   },
 });

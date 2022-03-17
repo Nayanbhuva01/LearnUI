@@ -14,6 +14,8 @@ import React, {useState} from 'react';
 import {BlockIcon, LogoIcon, RightIcon, WrongIcon} from '../../assets/svgs';
 import CustomFont from '../utils/CustomFont';
 import Button from '../component/Button';
+import WithBackground from '../hoc/WithBackground';
+import LogoWithBar from '../hoc/LogoWithBar';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -66,130 +68,110 @@ export default function Home({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/BG.png')}
-        style={styles.BGImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <ScrollView
-            contentContainerStyle={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingBottom: 20,
-            }}>
-            <View style={styles.LogoBG}>
-              <LogoIcon style={styles.Logo} />
+    <WithBackground>
+      <View
+        style={{
+          flex: 1,
+          // justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <LogoWithBar />
+        <View style={styles.FContainer}>
+          <Text style={[styles.AText, CustomFont.Roboto_Bol]}>
+            Create Survey
+          </Text>
+          <View style={styles.Input}>
+            <TextInput
+              placeholder="Test Survey #1"
+              placeholderTextColor={'#000'}
+              onChangeText={value => setSurveyName(value)}
+              onEndEditing={SurveyNameHandler}
+            />
+            {IsValidSurName === 0 ? null : IsValidSurName === 1 ? (
+              <RightIcon style={styles.Icon} />
+            ) : (
+              <WrongIcon style={styles.Icon} />
+            )}
+          </View>
+          <View style={styles.Input}>
+            <TextInput
+              placeholder="Petar’s Lighting Solutions"
+              placeholderTextColor={'#a0a4ab'}
+              onChangeText={value => setWorkName(value)}
+              onEndEditing={SurveyWorkHandler}
+            />
+            {IsValidWorkName === 0 ? null : IsValidWorkName === 1 ? (
+              <RightIcon style={styles.Icon} />
+            ) : (
+              <WrongIcon style={styles.Icon} />
+            )}
+          </View>
+          <View style={styles.Input}>
+            <TextInput
+              placeholder="49a Kilsheelan Clonmel, Clonmel"
+              placeholderTextColor={'#a0a4ab'}
+              onChangeText={value => setAddName(value)}
+              onEndEditing={SurveyAddHandler}
+            />
+            {IsValidAddName === 0 ? null : IsValidAddName === 1 ? (
+              <RightIcon style={styles.Icon} />
+            ) : (
+              <WrongIcon style={styles.Icon} />
+            )}
+          </View>
+          <View style={styles.SelectCont}>
+            <View style={styles.CoContainer}>
+              <Text style={styles.AllText}>Operational Hours per Year:</Text>
+              <View style={styles.SmallInput}>
+                <TextInput
+                  placeholder="5000"
+                  style={styles.Sminput}
+                  keyboardType="number-pad"
+                />
+              </View>
             </View>
-            <View style={styles.FContainer}>
-              <Text style={[styles.AText, CustomFont.Roboto_Bol]}>
-                Create Survey
-              </Text>
-              <View style={styles.Input}>
-                <TextInput
-                  placeholder="Test Survey #1"
-                  placeholderTextColor={'#000'}
-                  onChangeText={value => setSurveyName(value)}
-                  onEndEditing={SurveyNameHandler}
-                />
-                {IsValidSurName === 0 ? null : IsValidSurName === 1 ? (
-                  <RightIcon style={styles.Icon} />
-                ) : (
-                  <WrongIcon style={styles.Icon} />
-                )}
-              </View>
-              <View style={styles.Input}>
-                <TextInput
-                  placeholder="Petar’s Lighting Solutions"
-                  placeholderTextColor={'#a0a4ab'}
-                  onChangeText={value => setWorkName(value)}
-                  onEndEditing={SurveyWorkHandler}
-                />
-                {IsValidWorkName === 0 ? null : IsValidWorkName === 1 ? (
-                  <RightIcon style={styles.Icon} />
-                ) : (
-                  <WrongIcon style={styles.Icon} />
-                )}
-              </View>
-              <View style={styles.Input}>
-                <TextInput
-                  placeholder="49a Kilsheelan Clonmel, Clonmel"
-                  placeholderTextColor={'#a0a4ab'}
-                  onChangeText={value => setAddName(value)}
-                  onEndEditing={SurveyAddHandler}
-                />
-                {IsValidAddName === 0 ? null : IsValidAddName === 1 ? (
-                  <RightIcon style={styles.Icon} />
-                ) : (
-                  <WrongIcon style={styles.Icon} />
-                )}
-              </View>
-              <View style={styles.SelectCont}>
-                <View style={styles.CoContainer}>
-                  <Text style={styles.AllText}>
-                    Operational Hours per Year:
-                  </Text>
-                  <View style={styles.SmallInput}>
-                    <TextInput placeholder="5000" style={styles.Sminput} />
-                  </View>
-                </View>
-                <Text style={{position: 'absolute', right: 5}}>h</Text>
-              </View>
+            <Text style={{position: 'absolute', right: 5}}>h</Text>
+          </View>
 
-              <View style={styles.SelectContB}>
-                <View style={styles.CoContainerB}>
-                  <Text style={styles.AllTextB}>Rate per KWh:</Text>
-                  <View style={styles.SmallInputB}>
-                    <TextInput placeholder="0.789551" style={styles.SminputB} />
-                  </View>
-                </View>
-                <Text style={{position: 'absolute', right: 5}}>€</Text>
+          <View style={styles.SelectContB}>
+            <View style={styles.CoContainerB}>
+              <Text style={styles.AllTextB}>Rate per KWh:</Text>
+              <View style={styles.SmallInputB}>
+                <TextInput
+                  placeholder="0.789551"
+                  style={styles.SminputB}
+                  keyboardType="number-pad"
+                />
               </View>
-              <Button BtnName="Next" onPress={NextHandler} />
             </View>
-            <TouchableOpacity
-              style={styles.BackBtn}
-              onPress={() => navigation.goBack()}>
-              <Text style={[styles.backTxt, CustomFont.Roboto_Reg]}>
-                Back to Home
-              </Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+            <Text style={{position: 'absolute', right: 5}}>€</Text>
+          </View>
+          <Button BtnName="Next" onPress={NextHandler} />
+        </View>
+
+        <View style={styles.Buttons}>
+          <TouchableOpacity
+            style={styles.BackBtn}
+            onPress={() => navigation.goBack()}>
+            <Text style={[styles.backTxt, CustomFont.Roboto_Reg]}>
+              Back to Home
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  BGImage: {
-    flex: 1,
-    alignItems: 'center',
-    width: windowWidth * 1,
-  },
-  LogoBG: {
-    backgroundColor: '#FD5086',
-    width: windowWidth * 1,
-    height: windowHeight * 0.16,
-    alignItems: 'center',
-  },
-  Logo: {
-    top: 20,
-  },
-
   BlockIcon: {
     right: '45%',
   },
 
   FContainer: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#fff',
     width: windowWidth * 0.95,
-    // height: windowHeight * 0.26,
     marginVertical: 10,
     alignItems: 'center',
     padding: 20,
@@ -276,6 +258,13 @@ const styles = StyleSheet.create({
   },
   SminputB: {
     width: windowWidth * 0.18,
+  },
+
+  Buttons: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginBottom: 20,
   },
 
   BackBtn: {

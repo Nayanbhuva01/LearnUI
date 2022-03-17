@@ -2,7 +2,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ImageBackground,
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
@@ -15,12 +14,12 @@ import {
   DialuxIcon,
   LogoIcon,
   MySurveyIcon,
-  UserIcon,
   UserPinkIcon,
 } from '../../assets/svgs';
 import CustomFont from '../utils/CustomFont';
 import Button from '../component/Button';
 import {CommonActions} from '@react-navigation/native';
+import WithBackground from '../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -55,95 +54,78 @@ export default function Home({navigation}) {
     );
   };
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/BG.png')}
-        style={styles.BGImage}>
-        <View style={styles.LogoBG}>
-          <LogoIcon style={styles.Logo} />
-          <View style={styles.BlockBG}>
-            <BlockIcon style={styles.BlockIcon} />
-          </View>
+    <WithBackground>
+      <View style={styles.LogoBG}>
+        <LogoIcon style={styles.Logo} />
+        <View style={styles.BlockBG}>
+          <BlockIcon style={styles.BlockIcon} />
         </View>
-        <View style={styles.FContainer}>
-          <Text style={[styles.AText, CustomFont.Roboto_Bol]}>Welcome</Text>
-          <Text style={[styles.BText, CustomFont.Roboto_Reg]}>
-            Petar’s Lighting Solutions
-          </Text>
-          <View style={styles.surveys}>
-            <TouchableOpacity
-              style={styles.CreateSurvey}
-              onPress={() => {
-                navigation.navigate('CreateSurvey');
-              }}>
-              <CreateSurvey />
-              <Text style={[styles.CreateSurText, CustomFont.Roboto_Bol]}>
-                Create Survey
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.MySurvey} onPress={MySurveyHandler}>
-              <MySurveyIcon />
-              <Text style={[styles.MySurText, CustomFont.Roboto_Bol]}>
-                My Surveys
-              </Text>
-            </TouchableOpacity>
-          </View>
+      </View>
+      <View style={styles.FContainer}>
+        <Text style={[styles.AText, CustomFont.Roboto_Bol]}>Welcome</Text>
+        <Text style={[styles.BText, CustomFont.Roboto_Reg]}>
+          Petar’s Lighting Solutions
+        </Text>
+        <View style={styles.surveys}>
+          <TouchableOpacity
+            style={styles.CreateSurvey}
+            onPress={() => {
+              navigation.navigate('CreateSurvey');
+            }}>
+            <CreateSurvey />
+            <Text style={[styles.CreateSurText, CustomFont.Roboto_Bol]}>
+              Create Survey
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.MySurvey} onPress={MySurveyHandler}>
+            <MySurveyIcon />
+            <Text style={[styles.MySurText, CustomFont.Roboto_Bol]}>
+              My Surveys
+            </Text>
+          </TouchableOpacity>
         </View>
+      </View>
 
-        <View style={styles.SContainer}>
-          <View style={styles.Options}>
-            <TouchableOpacity
-              style={styles.CalculateBtn}
-              onPress={CalcCarbonHandler}>
-              <CalcIcon />
-              <Text style={[styles.CalculateTxt, CustomFont.Roboto_Reg]}>
-                Calculate Carbon Credit
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.DialuxBtn} onPress={DialuxHandler}>
-              <DialuxIcon />
-              <Text style={[styles.DialuxTxt, CustomFont.Roboto_Reg]}>
-                Dialux Design
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.Options}>
-            <TouchableOpacity
-              style={styles.MyAccBtn}
-              onPress={MyAccountHandler}>
-              <UserPinkIcon />
-              <Text style={[styles.MyAccTxt, CustomFont.Roboto_Reg]}>
-                My Account
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.ContactBtn}
-              onPress={ContactHandler}>
-              <ContectIcon />
-              <Text style={[styles.ContectTxt, CustomFont.Roboto_Reg]}>
-                Contact Us
-              </Text>
-            </TouchableOpacity>
-          </View>
+      <View style={styles.SContainer}>
+        <View style={styles.Options}>
+          <TouchableOpacity
+            style={styles.CalculateBtn}
+            onPress={CalcCarbonHandler}>
+            <CalcIcon />
+            <Text style={[styles.CalculateTxt, CustomFont.Roboto_Reg]}>
+              Calculate Carbon Credit
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.DialuxBtn} onPress={DialuxHandler}>
+            <DialuxIcon />
+            <Text style={[styles.DialuxTxt, CustomFont.Roboto_Reg]}>
+              Dialux Design
+            </Text>
+          </TouchableOpacity>
         </View>
-        <Button BtnName="Log Out" onPress={LogOutHandler} />
-      </ImageBackground>
-    </View>
+        <View style={styles.Options}>
+          <TouchableOpacity style={styles.MyAccBtn} onPress={MyAccountHandler}>
+            <UserPinkIcon />
+            <Text style={[styles.MyAccTxt, CustomFont.Roboto_Reg]}>
+              My Account
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.ContactBtn} onPress={ContactHandler}>
+            <ContectIcon />
+            <Text style={[styles.ContectTxt, CustomFont.Roboto_Reg]}>
+              Contact Us
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <Button BtnName="Log Out" onPress={LogOutHandler} />
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  BGImage: {
-    flex: 1,
-    alignItems: 'center',
-    width: windowWidth * 1,
-  },
   LogoBG: {
+    
     backgroundColor: '#FD5086',
     width: windowWidth * 1,
     height: windowHeight * 0.16,

@@ -10,13 +10,10 @@ import {
   ToastAndroid,
 } from 'react-native';
 import React, {useState} from 'react';
-import {
-  EllipseIcon,
-  LockIcon,
-  VectorIcon,
-} from '../../assets/svgs';
+import {EllipseIcon, LockIcon, VectorIcon} from '../../assets/svgs';
 import Button from '../component/Button';
 import Input from '../component/Input';
+import WithBackground from '../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -59,61 +56,54 @@ export default function NewPasswordCreate({navigation}) {
     }
   };
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/BG.png')}
-        style={styles.bgImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <KeyboardAvoidingView behavior="padding" style={styles.container}>
-            <EllipseIcon style={styles.Logo} />
-            <Text style={styles.ResetPassTxt}>Reset Password</Text>
+    <WithBackground>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+        <View style={{alignItems: 'center'}}>
+          <EllipseIcon style={styles.Logo} />
+          <Text style={styles.ResetPassTxt}>Reset Password</Text>
 
-            <Input
-              Icon={<LockIcon style={styles.LockIcon} />}
-              placeholder="New Password"
-              endIcon={<VectorIcon style={styles.eyeCon} />}
-              secureTextEntry={visiblePassword}
-              onChangeText={value => setPassword(value)}
-              onPressEye={() => setVisiblePassword(!visiblePassword)}
-            />
+          <Input
+            Icon={<LockIcon style={styles.LockIcon} />}
+            placeholder="New Password"
+            endIcon={<VectorIcon style={styles.eyeCon} />}
+            secureTextEntry={visiblePassword}
+            onChangeText={value => setPassword(value)}
+            onPressEye={() => setVisiblePassword(!visiblePassword)}
+          />
 
-            <Input
-              Icon={<LockIcon style={styles.LockIcon} />}
-              placeholder="Repeat Password"
-              endIcon={<VectorIcon style={styles.eyeCon} />}
-              secureTextEntry={visibleConfPassword}
-              onChangeText={value => setConfPassword(value)}
-              onPressEye={() => setVisibleConfPassword(!visibleConfPassword)}
-            />
-            <View style={styles.button}>
-              <Button BtnName="Change Password" onPress={ChangePassHandler} />
-            </View>
-          </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+          <Input
+            Icon={<LockIcon style={styles.LockIcon} />}
+            placeholder="Repeat Password"
+            endIcon={<VectorIcon style={styles.eyeCon} />}
+            secureTextEntry={visibleConfPassword}
+            onChangeText={value => setConfPassword(value)}
+            onPressEye={() => setVisibleConfPassword(!visibleConfPassword)}
+          />
+        </View>
+        <View style={styles.button}>
+          <Button BtnName="Change Password" onPress={ChangePassHandler} />
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    width: windowWidth * 1,
-  },
-
-  Logo: {},
-
   ResetPassTxt: {
     color: '#fff',
     fontSize: 20,
     marginTop: 36,
     marginBottom: 11,
+  },
+
+  Logo: {
+    marginTop: 50,
+    marginBottom: 30,
   },
 
   emailIcon: {
@@ -130,6 +120,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    marginVertical: 40,
+    alignItems: 'center',
+    marginBottom: 80,
   },
 });

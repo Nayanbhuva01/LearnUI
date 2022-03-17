@@ -20,6 +20,9 @@ import {
   WrongIcon,
 } from '../../assets/svgs';
 import CustomFont from '../utils/CustomFont';
+import WithBackground from '../hoc/WithBackground';
+import LogoWithBar from '../hoc/LogoWithBar';
+import Button from '../component/Button';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -33,103 +36,63 @@ export default function SavedFittings({navigation}) {
     navigation.navigate('CompleteSurveyVerify');
   };
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/BG.png')}
-        style={styles.BGImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <ScrollView
-            contentContainerStyle={{
-              justifyContent: 'center',
+    <WithBackground>
+      <LogoWithBar />
+      <View style={styles.FContainer}>
+        <Text style={[styles.AText, CustomFont.Roboto_Bol]}>
+          Saved Fittings
+        </Text>
+        <View style={styles.InnContainer}>
+          <View
+            style={{
+              flexDirection: 'row',
               alignItems: 'center',
-              paddingBottom: 20,
+              backgroundColor: '#F0F0F0',
+              width: windowWidth * 0.93,
+              padding: 11,
             }}>
-            <View style={styles.LogoBG}>
-              <LogoIcon style={styles.Logo} />
-            </View>
-            <View style={styles.FContainer}>
-              <Text style={[styles.AText, CustomFont.Roboto_Bol]}>
-                Saved Fittings
+            <View style={{flex: 1}}>
+              <Text style={[styles.labelTxt, CustomFont.Roboto_Bol]}>
+                Test Fitting #1
               </Text>
-              <View style={styles.InnContainer}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    backgroundColor: '#F0F0F0',
-                    width: windowWidth * 0.93,
-                    padding: 11,
-                  }}>
-                  <View style={{flex: 1}}>
-                    <Text style={[styles.labelTxt, CustomFont.Roboto_Bol]}>
-                      Test Fitting #1
-                    </Text>
-                    <Text style={styles.labelTxt}>(1800mm x 600mm x 30mm)</Text>
-                  </View>
-                  <TouchableOpacity
-                    onPress={() => {
-                      navigation.navigate('EditFitting');
-                    }}>
-                    <EditIcon />
-                  </TouchableOpacity>
-                </View>
-                <SmileIcon style={styles.SmileIcon} />
-                <Text style={styles.OopsMsg}>
-                  You can always Create More Fittings, just click the button
-                  below.
-                </Text>
-                <TouchableOpacity
-                  style={styles.fittingBtn}
-                  onPress={newFittingHandler}>
-                  <Text style={styles.fittingBtnTxt}>Create New Fitting</Text>
-                </TouchableOpacity>
-              </View>
+              <Text style={styles.labelTxt}>(1800mm x 600mm x 30mm)</Text>
             </View>
             <TouchableOpacity
-              // style={styles.CompleteBtn}
-              style={styles.CompleteBtnB}
-              onPress={CompleteHandler}>
-              <Text style={styles.completeBtnTxt}>Complete Survey</Text>
+              onPress={() => {
+                navigation.navigate('EditFitting');
+              }}>
+              <EditIcon />
             </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.BackBtn}
-              onPress={() => navigation.navigate('Home')}>
-              <Text style={[styles.backTxt, CustomFont.Roboto_Reg]}>
-                Back to Home
-              </Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+          </View>
+          <SmileIcon style={styles.SmileIcon} />
+          <Text style={styles.OopsMsg}>
+            You can always Create More Fittings, just click the button below.
+          </Text>
+          <TouchableOpacity
+            style={styles.fittingBtn}
+            onPress={newFittingHandler}>
+            <Text style={styles.fittingBtnTxt}>Create New Fitting</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <Button BtnName="Complete Survey" onPress={CompleteHandler} />
+      <TouchableOpacity
+        style={styles.BackBtn}
+        onPress={() => navigation.navigate('Home')}>
+        <Text style={[styles.backTxt, CustomFont.Roboto_Reg]}>
+          Back to Home
+        </Text>
+      </TouchableOpacity>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  BGImage: {
-    flex: 1,
-    alignItems: 'center',
-    width: windowWidth * 1,
-  },
-  LogoBG: {
-    backgroundColor: '#FD5086',
-    width: windowWidth * 1,
-    height: windowHeight * 0.16,
-    alignItems: 'center',
-  },
-  Logo: {
-    top: 20,
-  },
-
   FContainer: {
+    flex: 1,
     backgroundColor: '#fff',
     width: windowWidth * 0.95,
-    height: windowHeight * 0.73,
+    height: windowHeight - 330,
     marginVertical: 10,
     alignItems: 'center',
     padding: 20,
@@ -172,36 +135,11 @@ const styles = StyleSheet.create({
 
   BackBtn: {
     marginTop: 30,
+    marginBottom: 10,
   },
   backTxt: {
     color: '#fff',
     fontSize: 14,
     textDecorationLine: 'underline',
-  },
-
-  CompleteBtn: {
-    marginTop: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: windowHeight * 0.08,
-    width: windowWidth * 0.8,
-    borderRadius: 50,
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    // opacity: 0.1,
-  },
-  CompleteBtnB: {
-    marginTop: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: windowHeight * 0.08,
-    width: windowWidth * 0.8,
-    borderRadius: 50,
-    backgroundColor: '#FD5086',
-    // opacity: 0.1,
-  },
-  completeBtnTxt: {
-    fontSize: 20,
-    color: '#fff',
-    // opacity: 0.4,
   },
 });

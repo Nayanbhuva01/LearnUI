@@ -2,17 +2,14 @@ import {
   StyleSheet,
   Text,
   View,
-  ImageBackground,
   Dimensions,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
   ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
 import Button from '../component/Button';
 import {EllipseIcon} from '../../assets/svgs';
 import CustomFont from '../utils/CustomFont';
+import WithBackground from '../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -23,56 +20,39 @@ export default function DeleteFitting({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/BG.png')}
-        style={styles.bgImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <ScrollView
-            contentContainerStyle={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <View style={styles.subContainer}>
-              <View style={styles.LogoContainer}>
-                <EllipseIcon style={styles.Logo} />
-              </View>
-              <View style={styles.middContainer}>
-                <Text style={[styles.TitleTxt, CustomFont.Roboto_Bol]}>
-                  CONGRATULATIONS!
-                </Text>
-                <View style={styles.messageContainer}>
-                  <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
-                    Your fitting has been Deleted.
-                  </Text>
-                </View>
-              </View>
-
-              <Button
-                btnStyle={{marginTop: 20}}
-                BtnName="Continue Survey"
-                onPress={BtnHandler}
-              />
+    <WithBackground>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View style={styles.subContainer}>
+          <View style={styles.LogoContainer}>
+            <EllipseIcon style={styles.Logo} />
+          </View>
+          <View style={styles.middContainer}>
+            <Text style={[styles.TitleTxt, CustomFont.Roboto_Bol]}>
+              CONGRATULATIONS!
+            </Text>
+            <View style={styles.messageContainer}>
+              <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
+                Your fitting has been Deleted.
+              </Text>
             </View>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+          </View>
+
+          <Button
+            btnStyle={{marginTop: 20}}
+            BtnName="Continue Survey"
+            onPress={BtnHandler}
+          />
+        </View>
+      </ScrollView>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: windowWidth * 1,
-  },
   subContainer: {
     alignItems: 'center',
     width: windowWidth * 1,

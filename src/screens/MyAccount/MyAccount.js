@@ -11,10 +11,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
-import {
-  LogoIcon,
-} from '../../../assets/svgs';
+import {LogoIcon} from '../../../assets/svgs';
 import CustomFont from '../../utils/CustomFont';
+import WithBackground from '../../hoc/WithBackground';
+import LogoWithBar from '../../hoc/LogoWithBar';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -25,122 +25,95 @@ export default function MySurveys({navigation}) {
   };
 
   const DeleteAccHandler = () => {
-    navigation.navigate('DeleteAccount')
-  }
+    navigation.navigate('DeleteAccount');
+  };
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../../assets/BG.png')}
-        style={styles.BGImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <ScrollView
-            contentContainerStyle={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingBottom: 20,
-            }}>
-            <View style={styles.LogoBG}>
-              <LogoIcon style={styles.Logo} />
-            </View>
-            <View style={styles.FContainer}>
-              <Text style={[styles.AText, CustomFont.Roboto_Bol]}>
-                My Account
-              </Text>
-              <View style={styles.BoxContainer}>
-                <View style={styles.InnerContainer}>
-                  <Text style={{flex: 2, color: '#000'}}>Company Name:</Text>
-                  <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput>
-                      <Text>Petar’s Lighting Solutions</Text>
-                    </TextInput>
-                  </View>
-                </View>
-                <View style={styles.InnerContainer}>
-                  <Text style={{flex: 2, color: '#000'}}>Address:</Text>
-                  <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput multiline={true}>
-                      <Text>49a Kilsheelan Clonmel, Clonmel</Text>
-                    </TextInput>
-                  </View>
-                </View>
-                <View style={styles.InnerContainer}>
-                  <Text style={{flex: 2, color: '#000'}}>E-Mail:</Text>
-                  <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput keyboardType="email-address">
-                      <Text>petar3@gmail.com</Text>
-                    </TextInput>
-                  </View>
-                </View>
-                <View style={styles.InnerContainer}>
-                  <Text style={{flex: 2, color: '#000'}}>Phone:</Text>
-                  <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput keyboardType="phone-pad">
-                      <Text>+353 78 1984 983</Text>
-                    </TextInput>
-                  </View>
-                </View>
-                <View style={styles.InnerContainer}>
-                  <Text style={{flex: 2, color: '#000'}}>Old Password:</Text>
-                  <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput secureTextEntry={true}>
-                      <Text></Text>
-                    </TextInput>
-                  </View>
-                </View>
-                <View style={styles.InnerContainer}>
-                  <Text style={{flex: 2, color: '#000'}}>New Password:</Text>
-                  <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
-                    <TextInput secureTextEntry={true}>
-                      <Text></Text>
-                    </TextInput>
-                  </View>
-                </View>
-                <View style={styles.DeleteAccContainer}>
-                  <TouchableOpacity onPress={DeleteAccHandler}>
-                    <Text style={{color: 'red'}}>Delete Account</Text>
-                  </TouchableOpacity>
-                </View>
-                <Button
-                  BtnName="Save"
-                  onPress={() => navigation.navigate('Home')}
-                />
+    <WithBackground>
+      <LogoWithBar />
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+        <View style={styles.FContainer}>
+          <Text style={[styles.AText, CustomFont.Roboto_Bol]}>My Account</Text>
+          <View style={styles.BoxContainer}>
+            <View style={styles.InnerContainer}>
+              <Text style={{flex: 2, color: '#000'}}>Company Name:</Text>
+              <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
+                <TextInput>
+                  <Text>Petar’s Lighting Solutions</Text>
+                </TextInput>
               </View>
             </View>
-            <TouchableOpacity
-              style={styles.BackBtn}
-              onPress={() => navigation.navigate('Home')}>
-              <Text style={[styles.backTxt, CustomFont.Roboto_Reg]}>
-                Back to Home
-              </Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+            <View style={styles.InnerContainer}>
+              <Text style={{flex: 2, color: '#000'}}>Address:</Text>
+              <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
+                <TextInput multiline={true}>
+                  <Text>49a Kilsheelan Clonmel, Clonmel</Text>
+                </TextInput>
+              </View>
+            </View>
+            <View style={styles.InnerContainer}>
+              <Text style={{flex: 2, color: '#000'}}>E-Mail:</Text>
+              <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
+                <TextInput keyboardType="email-address">
+                  <Text>petar3@gmail.com</Text>
+                </TextInput>
+              </View>
+            </View>
+            <View style={styles.InnerContainer}>
+              <Text style={{flex: 2, color: '#000'}}>Phone:</Text>
+              <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
+                <TextInput keyboardType="phone-pad">
+                  <Text>+353 78 1984 983</Text>
+                </TextInput>
+              </View>
+            </View>
+            <View style={styles.InnerContainer}>
+              <Text style={{flex: 2, color: '#000'}}>Old Password:</Text>
+              <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
+                <TextInput secureTextEntry={true}>
+                  <Text></Text>
+                </TextInput>
+              </View>
+            </View>
+            <View style={styles.InnerContainer}>
+              <Text style={{flex: 2, color: '#000'}}>New Password:</Text>
+              <View style={{flex: 3, backgroundColor: '#EEEEEE'}}>
+                <TextInput secureTextEntry={true}>
+                  <Text></Text>
+                </TextInput>
+              </View>
+            </View>
+            <View style={styles.DeleteAccContainer}>
+              <TouchableOpacity onPress={DeleteAccHandler}>
+                <Text style={{color: 'red'}}>Delete Account</Text>
+              </TouchableOpacity>
+            </View>
+            <Button
+              BtnName="Save"
+              onPress={() => navigation.navigate('Home')}
+            />
+          </View>
+        </View>
+
+        <View style={styles.Buttons}>
+          <TouchableOpacity
+            style={styles.BackBtn}
+            onPress={() => navigation.navigate('Home')}>
+            <Text style={[styles.backTxt, CustomFont.Roboto_Reg]}>
+              Back to Home
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  BGImage: {
-    flex: 1,
-    alignItems: 'center',
-    width: windowWidth * 1,
-  },
-  LogoBG: {
-    backgroundColor: '#FD5086',
-    width: windowWidth * 1,
-    height: windowHeight * 0.16,
-    alignItems: 'center',
-  },
-  Logo: {
-    top: 20,
-  },
-
   FContainer: {
     backgroundColor: '#fff',
     width: windowWidth * 0.95,
@@ -172,6 +145,11 @@ const styles = StyleSheet.create({
   DeleteAccContainer: {
     width: windowWidth * 0.8,
     alignItems: 'flex-end',
+  },
+
+  Buttons: {
+    alignItems: 'center',
+    marginBottom: 20,
   },
 
   backTxt: {

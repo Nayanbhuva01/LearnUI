@@ -21,6 +21,7 @@ import {
 import CheckBox from '@react-native-community/checkbox';
 import Button from '../component/Button';
 import Input from '../component/Input';
+import WithBackground from '../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -43,101 +44,80 @@ export default function AccountRegistration({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/BG.png')}
-        style={styles.bgImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <ScrollView
-            contentContainerStyle={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingBottom: 30,
-            }}>
-            <View style={styles.LogoContainer}>
-              <EllipseIcon style={styles.Logo} />
-            </View>
-            <View style={styles.middContainer}>
-              <Text style={styles.CompanyRegistrationTxt}>
-                Account Registration
-              </Text>
+    <WithBackground>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <View style={{alignItems: 'center'}}>
+          <EllipseIcon style={styles.LogoContainer} />
+          <View style={styles.middContainer}>
+            <Text style={styles.CompanyRegistrationTxt}>
+              Account Registration
+            </Text>
 
-              <Input
-                Icon={<UserIcon style={styles.userIcon} />}
-                placeholder="Username"
+            <Input
+              Icon={<UserIcon style={styles.userIcon} />}
+              placeholder="Username"
+            />
+
+            <Input
+              Icon={<MailIcon style={styles.userIcon} />}
+              placeholder="E-Mail"
+            />
+
+            <Input
+              Icon={<LockIcon style={styles.userIcon} />}
+              placeholder="New Password"
+              secureTextEntry={visiblePassword}
+              endIcon={<VectorIcon style={styles.eyeCon} />}
+              onChangeText={value => setPassword(value)}
+              onPressEye={() => setVisiblePassword(!visiblePassword)}
+            />
+
+            <Input
+              Icon={<LockIcon style={styles.userIcon} />}
+              placeholder="Repeat Password"
+              secureTextEntry={visibleConfPassword}
+              endIcon={<VectorIcon style={styles.eyeCon} />}
+              onChangeText={value => setConfPassword(value)}
+              onPressEye={() => setVisibleConfPassword(!visibleConfPassword)}
+            />
+
+            <View style={styles.CheckBoxContainer}>
+              <CheckBox
+                disabled={false}
+                value={isChecked}
+                onValueChange={value => setIsChecked(value)}
+                tintColors={{true: '#FD5086', false: '#fff'}}
               />
-
-              <Input
-                Icon={<MailIcon style={styles.userIcon} />}
-                placeholder="E-Mail"
-              />
-
-              <Input
-                Icon={<LockIcon style={styles.userIcon} />}
-                placeholder="New Password"
-                secureTextEntry={visiblePassword}
-                endIcon={<VectorIcon style={styles.eyeCon} />}
-                onChangeText={value => setPassword(value)}
-                onPressEye={() => setVisiblePassword(!visiblePassword)}
-              />
-
-              <Input
-                Icon={<LockIcon style={styles.userIcon} />}
-                placeholder="Repeat Password"
-                secureTextEntry={visibleConfPassword}
-                endIcon={<VectorIcon style={styles.eyeCon} />}
-                onChangeText={value => setConfPassword(value)}
-                onPressEye={() => setVisibleConfPassword(!visibleConfPassword)}
-              />
-
-              <View style={styles.CheckBoxContainer}>
-                <CheckBox
-                  disabled={false}
-                  value={isChecked}
-                  onValueChange={value => setIsChecked(value)}
-                  tintColors={{true: '#FD5086', false: '#fff'}}
-                />
-                <TouchableOpacity>
-                  <Text style={styles.TandCTxt}>
-                    I accept Terms & Conditions
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={styles.buttons}>
-              <Button BtnName="Register Account" onPress={RegisterAccHandler} />
-
-              <TouchableOpacity style={styles.LogIn} onPress={loginHandler}>
-                <Text style={styles.TextA}>Already have account?</Text>
-                <Text style={styles.TextB}> Log In</Text>
+              <TouchableOpacity>
+                <Text style={styles.TandCTxt}>I accept Terms & Conditions</Text>
               </TouchableOpacity>
             </View>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+          </View>
+        </View>
+        <View style={styles.buttons}>
+          <Button BtnName="Register Account" onPress={RegisterAccHandler} />
+
+          <TouchableOpacity style={styles.LogIn} onPress={loginHandler}>
+            <Text style={styles.TextA}>Already have account?</Text>
+            <Text style={styles.TextB}> Log In</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    width: windowWidth * 1,
-  },
-
-  //Logo
   LogoContainer: {
-    marginTop: 20,
+    marginTop: 30,
     marginBottom: 30,
   },
 
-  //Company Registration
   middContainer: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -167,9 +147,9 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 
-  //Button
   buttons: {
     alignItems: 'center',
+    marginBottom: 10,
   },
 
   LogIn: {

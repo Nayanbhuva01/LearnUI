@@ -35,7 +35,6 @@ import MySurveys from './src/screens/MySurveys/MySurveys';
 import SurveyOverview from './src/screens/MySurveys/SurveyOverview';
 import DeleteSurvey from './src/screens/MySurveys/DeleteSurvey';
 import SurveyDeleteSuccess from './src/screens/MySurveys/SurveyDeleteSuccess';
-import MySurveyBlank from './src/screens/MySurveys/MySurveyBlank';
 import MyAccount from './src/screens/MyAccount/MyAccount';
 import DeleteAccount from './src/screens/MyAccount/DeleteAccount';
 import DeleteAccSuccess from './src/screens/MyAccount/DeleteAccSuccess';
@@ -49,7 +48,7 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="NewFittingWizard">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -213,11 +212,6 @@ const App = () => {
         <Stack.Screen
           name="SurveyDeleteSuccess"
           component={SurveyDeleteSuccess}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="MySurveyBlank"
-          component={MySurveyBlank}
           options={{headerShown: false}}
         />
         <Stack.Screen

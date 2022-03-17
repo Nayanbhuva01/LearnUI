@@ -15,6 +15,7 @@ import React, {useState} from 'react';
 import Button from '../../component/Button';
 import {EllipseIcon, RightIcon, WrongIcon} from '../../../assets/svgs';
 import CustomFont from '../../utils/CustomFont';
+import WithBackground from '../../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -41,99 +42,82 @@ export default function S4OperatingTime({navigation}) {
   };
 
   return (
-    <ImageBackground
-      source={require('../../../assets/BG.png')}
-      style={styles.bgImage}>
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <KeyboardAvoidingView>
-          <View style={styles.subContainer}>
+    <WithBackground>
+      <View style={{flex: 1, justifyContent: 'space-between'}}>
+        <View
+          style={{
+            alignItems: 'center',
+          }}>
+          <EllipseIcon style={styles.LogoContainer} />
+          <View style={styles.middContainer}>
+            <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
+              Step 4. Operating Time
+            </Text>
+            <View style={styles.messageContainer}>
+              <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
+                How many hours per year they are operating
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.InpContainer}>
+            <Text style={[styles.labelTxt, CustomFont.Roboto_Reg]}>
+              Per Year:
+            </Text>
+            <View style={styles.Input}>
+              <TextInput
+                style={styles.coInput}
+                placeholder="6000"
+                placeholderTextColor={'#ddd'}
+                keyboardType="numeric"
+                onChangeText={value => setTime(value)}
+                onEndEditing={timeHandler}
+              />
+            </View>
+            <Text style={[styles.pcsTxt, CustomFont.Roboto_Reg]}>h</Text>
             <View
               style={{
                 flex: 1,
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '30%',
               }}>
-              <View style={styles.LogoContainer}>
-                <EllipseIcon style={styles.Logo} />
-              </View>
-              <View style={styles.middContainer}>
-                <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
-                  Step 4. Operating Time
-                </Text>
-                <View style={styles.messageContainer}>
-                  <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
-                    How many hours per year they are operating
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.InpContainer}>
-                <Text style={[styles.labelTxt, CustomFont.Roboto_Reg]}>
-                  Per Year:
-                </Text>
-                <View style={styles.Input}>
-                  <TextInput
-                    style={styles.coInput}
-                    placeholder="6000"
-                    placeholderTextColor={'#ddd'}
-                    keyboardType="numeric"
-                    onChangeText={value => setTime(value)}
-                    onEndEditing={timeHandler}
-                  />
-                </View>
-                <Text style={[styles.pcsTxt, CustomFont.Roboto_Reg]}>h</Text>
-                <View
-                  style={{
-                    flex: 1,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  {isValidTime === 0 ? null : isValidTime === 1 ? (
-                    <RightIcon style={styles.Icon} />
-                  ) : (
-                    <WrongIcon style={styles.Icon} />
-                  )}
-                </View>
-              </View>
-            </View>
-            <View style={styles.Buttons}>
-              <Button BtnName="Next" onPress={NextHandler} />
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Text
-                  style={[
-                    {
-                      color: '#fff',
-                      textDecorationLine: 'underline',
-                      marginTop: 10,
-                    },
-                    CustomFont.Roboto_Reg,
-                  ]}>
-                  Back
-                </Text>
-              </TouchableOpacity>
+              {isValidTime === 0 ? null : isValidTime === 1 ? (
+                <RightIcon style={styles.Icon} />
+              ) : (
+                <WrongIcon style={styles.Icon} />
+              )}
             </View>
           </View>
-        </KeyboardAvoidingView>
-      </TouchableWithoutFeedback>
-    </ImageBackground>
+        </View>
+        <View style={styles.Buttons}>
+          <Button BtnName="Next" onPress={NextHandler} />
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text
+              style={[
+                {
+                  color: '#fff',
+                  textDecorationLine: 'underline',
+                  marginTop: 10,
+                },
+                CustomFont.Roboto_Reg,
+              ]}>
+              Back
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: windowWidth * 1,
-  },
   subContainer: {
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingBottom: 20,
   },
   LogoContainer: {
-    // marginTop: 30,
+    marginTop: 30,
     marginBottom: 30,
   },
 
@@ -157,7 +141,6 @@ const styles = StyleSheet.create({
   },
 
   InpContainer: {
-    // flex: 1,
     flexDirection: 'row',
     width: windowWidth * 0.9,
     alignItems: 'center',
@@ -189,6 +172,6 @@ const styles = StyleSheet.create({
   },
   Buttons: {
     alignItems: 'center',
-    justifyContent: 'center',
+    marginBottom: 10,
   },
 });

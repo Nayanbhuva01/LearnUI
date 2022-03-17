@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
-  ScrollView,
+  KeyboardAvoidingView,
   TextInput,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -15,6 +15,7 @@ import Button from '../../component/Button';
 import {EllipseIcon, RightIcon, WrongIcon} from '../../../assets/svgs';
 import CustomFont from '../../utils/CustomFont';
 import Input from '../../component/Input';
+import WithBackground from '../../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -67,135 +68,114 @@ export default function S2NormalSize({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../../assets/BG.png')}
-        style={styles.bgImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <ScrollView
-            contentContainerStyle={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: windowWidth * 1,
-              paddingBottom: 20,
-            }}>
-            <View style={styles.subContainer}>
-              <View style={styles.LogoContainer}>
-                <EllipseIcon style={styles.Logo} />
-              </View>
-              <View style={styles.middContainer}>
-                <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
-                  Step 2. Fitting Size
-                </Text>
-                <View style={styles.messageContainer}>
-                  <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
-                    Please enter the size of your Fittings.
-                  </Text>
-                </View>
-              </View>
+    <WithBackground>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'space-between',
+        }}>
+        <View style={{alignItems: 'center'}}>
+          <EllipseIcon style={styles.LogoContainer} />
 
-              <View style={styles.InpContainer}>
-                <Text style={styles.labelTxt}>Lenght:</Text>
-                <View style={styles.Input}>
-                  <TextInput
-                    style={styles.coInput}
-                    placeholder="1800"
-                    placeholderTextColor={'#ddd'}
-                    keyboardType="numeric"
-                    onChangeText={value => setLength(value)}
-                    onEndEditing={lengthHandler}
-                  />
-                </View>
-                <Text style={styles.mmTxt}>mm</Text>
-                <View style={styles.IconContainer}>
-                  {isValidLength === 0 ? null : isValidLength === 1 ? (
-                    <RightIcon style={styles.Icon} />
-                  ) : (
-                    <WrongIcon style={styles.Icon} />
-                  )}
-                </View>
-              </View>
-
-              <View style={styles.InpContainer}>
-                <Text style={styles.labelTxt}>Width:</Text>
-                <View style={styles.Input}>
-                  <TextInput
-                    style={styles.coInput}
-                    placeholder="600"
-                    placeholderTextColor={'#ddd'}
-                    keyboardType="numeric"
-                    onChangeText={value => setWidth(value)}
-                    onEndEditing={widthHandler}
-                  />
-                </View>
-                <Text style={styles.mmTxt}>mm</Text>
-                <View style={styles.IconContainer}>
-                  {isValidWidth === 0 ? null : isValidWidth === 1 ? (
-                    <RightIcon style={styles.Icon} />
-                  ) : (
-                    <WrongIcon style={styles.Icon} />
-                  )}
-                </View>
-              </View>
-
-              <View style={styles.InpContainer}>
-                <Text style={styles.labelTxt}>Height:</Text>
-                <View style={styles.Input}>
-                  <TextInput
-                    style={styles.coInput}
-                    placeholder="30"
-                    placeholderTextColor={'#ddd'}
-                    keyboardType="numeric"
-                    onChangeText={value => setHeight(value)}
-                    onEndEditing={heightHandler}
-                  />
-                </View>
-                <Text style={styles.mmTxt}>mm</Text>
-                <View style={styles.IconContainer}>
-                  {isValidHeight === 0 ? null : isValidHeight === 1 ? (
-                    <RightIcon style={styles.Icon} />
-                  ) : (
-                    <WrongIcon style={styles.Icon} />
-                  )}
-                </View>
-              </View>
-
-              <View style={styles.Buttons}>
-                <Button BtnName="Next" onPress={NextHandler} />
-                <TouchableOpacity onPress={() => navigation.goBack()}>
-                  <Text
-                    style={[
-                      {
-                        color: '#fff',
-                        textDecorationLine: 'underline',
-                        marginTop: 30,
-                      },
-                      CustomFont.Roboto_Reg,
-                    ]}>
-                    Back
-                  </Text>
-                </TouchableOpacity>
-              </View>
+          <View style={styles.middContainer}>
+            <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
+              Step 2. Fitting Size
+            </Text>
+            <View style={styles.messageContainer}>
+              <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
+                Please enter the size of your Fittings.
+              </Text>
             </View>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+          </View>
+
+          <View style={styles.InpContainer}>
+            <Text style={styles.labelTxt}>Lenght:</Text>
+            <View style={styles.Input}>
+              <TextInput
+                style={styles.coInput}
+                placeholder="1800"
+                placeholderTextColor={'#ddd'}
+                keyboardType="numeric"
+                onChangeText={value => setLength(value)}
+                onEndEditing={lengthHandler}
+              />
+            </View>
+            <Text style={styles.mmTxt}>mm</Text>
+            <View style={styles.IconContainer}>
+              {isValidLength === 0 ? null : isValidLength === 1 ? (
+                <RightIcon style={styles.Icon} />
+              ) : (
+                <WrongIcon style={styles.Icon} />
+              )}
+            </View>
+          </View>
+
+          <View style={styles.InpContainer}>
+            <Text style={styles.labelTxt}>Width:</Text>
+            <View style={styles.Input}>
+              <TextInput
+                style={styles.coInput}
+                placeholder="600"
+                placeholderTextColor={'#ddd'}
+                keyboardType="numeric"
+                onChangeText={value => setWidth(value)}
+                onEndEditing={widthHandler}
+              />
+            </View>
+            <Text style={styles.mmTxt}>mm</Text>
+            <View style={styles.IconContainer}>
+              {isValidWidth === 0 ? null : isValidWidth === 1 ? (
+                <RightIcon style={styles.Icon} />
+              ) : (
+                <WrongIcon style={styles.Icon} />
+              )}
+            </View>
+          </View>
+
+          <View style={styles.InpContainer}>
+            <Text style={styles.labelTxt}>Height:</Text>
+            <View style={styles.Input}>
+              <TextInput
+                style={styles.coInput}
+                placeholder="30"
+                placeholderTextColor={'#ddd'}
+                keyboardType="numeric"
+                onChangeText={value => setHeight(value)}
+                onEndEditing={heightHandler}
+              />
+            </View>
+            <Text style={styles.mmTxt}>mm</Text>
+            <View style={styles.IconContainer}>
+              {isValidHeight === 0 ? null : isValidHeight === 1 ? (
+                <RightIcon style={styles.Icon} />
+              ) : (
+                <WrongIcon style={styles.Icon} />
+              )}
+            </View>
+          </View>
+        </View>
+        <View style={styles.Buttons}>
+          <Button BtnName="Next" onPress={NextHandler} />
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text
+              style={[
+                {
+                  color: '#fff',
+                  textDecorationLine: 'underline',
+                  marginTop: 10,
+                },
+                CustomFont.Roboto_Reg,
+              ]}>
+              Back
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: windowWidth * 1,
-  },
   subContainer: {
     flex: 1,
     alignItems: 'center',
@@ -226,14 +206,13 @@ const styles = StyleSheet.create({
   },
 
   InpContainer: {
-    flex: 1,
     flexDirection: 'row',
-    width: windowWidth * 0.7,
+    width: windowWidth * 0.8,
     alignItems: 'center',
     marginBottom: 5,
   },
   Input: {
-    flex: 4,
+    flex: 5,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.2)',
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -261,8 +240,9 @@ const styles = StyleSheet.create({
   },
 
   Buttons: {
+    // flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    // top: 90,
+    // justifyContent: 'flex-end',
+    marginBottom: 10,
   },
 });

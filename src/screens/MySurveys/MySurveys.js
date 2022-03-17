@@ -20,6 +20,8 @@ import {
   WrongIcon,
 } from '../../../assets/svgs';
 import CustomFont from '../../utils/CustomFont';
+import WithBackground from '../../hoc/WithBackground';
+import LogoWithBar from '../../hoc/LogoWithBar';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -29,96 +31,65 @@ export default function MySurveys({navigation}) {
     navigation.navigate('NewFittingWizard');
   };
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../../assets/BG.png')}
-        style={styles.BGImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <ScrollView
-            contentContainerStyle={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingBottom: 20,
-            }}>
-            <View style={styles.LogoBG}>
-              <LogoIcon style={styles.Logo} />
-            </View>
-            <View style={styles.FContainer}>
-              <Text style={[styles.AText, CustomFont.Roboto_Bol]}>
-                My Surveys
-              </Text>
-              <View style={styles.InnContainer}>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('SurveyOverview');
-                  }}>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                      backgroundColor: '#F0F0F0',
-                      width: windowWidth * 0.93,
-                      padding: 11,
-                    }}>
-                    <View style={{flex: 1, flexDirection: 'row'}}>
-                      <Text style={[styles.labelTxt, CustomFont.Roboto_Bol]}>
-                        Test Fitting #1
-                      </Text>
-                      <Text style={styles.labelTxt}> (9/7/2019 3:51 PM)</Text>
-                    </View>
-                    <Text style={[styles.labelTxt, CustomFont.Roboto_Bol]}>
-                      1 Fitting
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-
-                <SmileIcon style={styles.SmileIcon} />
-                <Text style={styles.OopsMsg}>
-                  You can always Create More Fittings, just click the button
-                  below.
-                </Text>
-                <TouchableOpacity
-                  style={styles.fittingBtn}
-                  onPress={newFittingHandler}>
-                  <Text style={styles.fittingBtnTxt}>Create New Fitting</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+    <WithBackground>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingBottom: 20,
+        }}>
+        <LogoWithBar />
+        <View style={styles.FContainer}>
+          <Text style={[styles.AText, CustomFont.Roboto_Bol]}>My Surveys</Text>
+          <View style={styles.InnContainer}>
             <TouchableOpacity
-              style={styles.BackBtn}
-              onPress={() => navigation.navigate('Home')}>
-              <Text style={[styles.backTxt, CustomFont.Roboto_Reg]}>
-                Back to Home
-              </Text>
+              onPress={() => {
+                navigation.navigate('SurveyOverview');
+              }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  backgroundColor: '#F0F0F0',
+                  width: windowWidth * 0.93,
+                  padding: 11,
+                }}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                  <Text style={[styles.labelTxt, CustomFont.Roboto_Bol]}>
+                    Test Fitting #1
+                  </Text>
+                  <Text style={styles.labelTxt}> (9/7/2019 3:51 PM)</Text>
+                </View>
+                <Text style={[styles.labelTxt, CustomFont.Roboto_Bol]}>
+                  1 Fitting
+                </Text>
+              </View>
             </TouchableOpacity>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+
+            <SmileIcon style={styles.SmileIcon} />
+            <Text style={styles.OopsMsg}>
+              You can always Create More Fittings, just click the button below.
+            </Text>
+            <TouchableOpacity
+              style={styles.fittingBtn}
+              onPress={newFittingHandler}>
+              <Text style={styles.fittingBtnTxt}>Create New Fitting</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <TouchableOpacity
+          style={styles.BackBtn}
+          onPress={() => navigation.navigate('Home')}>
+          <Text style={[styles.backTxt, CustomFont.Roboto_Reg]}>
+            Back to Home
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  BGImage: {
-    flex: 1,
-    alignItems: 'center',
-    width: windowWidth * 1,
-  },
-  LogoBG: {
-    backgroundColor: '#FD5086',
-    width: windowWidth * 1,
-    height: windowHeight * 0.16,
-    alignItems: 'center',
-  },
-  Logo: {
-    top: 20,
-  },
-
   FContainer: {
     backgroundColor: '#fff',
     width: windowWidth * 0.95,

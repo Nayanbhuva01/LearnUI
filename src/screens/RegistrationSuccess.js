@@ -9,6 +9,7 @@ import React, {useState} from 'react';
 import {EllipseIcon} from '../../assets/svgs';
 import CustomFont from '../utils/CustomFont';
 import Button from '../component/Button';
+import WithBackground from '../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -19,49 +20,40 @@ export default function RegistrationSuccess({navigation}) {
   };
 
   return (
-    <ImageBackground
-      source={require('../../assets/BG.png')}
-      style={styles.bgImage}>
-      <View style={styles.container}>
-        <EllipseIcon style={styles.LogoContainer} />
-        <View style={styles.middContainer}>
-          <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
-            CONGRATULATIONS!
-          </Text>
-          <View style={styles.messageContainer}>
-            <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
-              Your account has been successfully Registered.
+    <WithBackground>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <View style={{alignItems: 'center'}}>
+          <EllipseIcon style={styles.LogoContainer} />
+          <View style={styles.middContainer}>
+            <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
+              CONGRATULATIONS!
             </Text>
-            <Text style={[styles.messageTxt, CustomFont.Roboto_Regular]}>
-              Please click on confirmation link to confirm your account.
-            </Text>
+            <View style={styles.messageContainer}>
+              <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
+                Your account has been successfully Registered.
+              </Text>
+              <Text style={[styles.messageTxt, CustomFont.Roboto_Regular]}>
+                Please click on confirmation link to confirm your account.
+              </Text>
+            </View>
           </View>
         </View>
         <View style={styles.buttons}>
           <Button BtnName="OK" onPress={OKHandler} />
         </View>
       </View>
-    </ImageBackground>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: windowWidth * 1,
-  },
-  subContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   LogoContainer: {
+    marginTop: 50,
     marginBottom: 30,
   },
 
@@ -85,6 +77,7 @@ const styles = StyleSheet.create({
   },
 
   buttons: {
-    marginTop: 50,
+    alignItems: 'center',
+    marginBottom: 80,
   },
 });

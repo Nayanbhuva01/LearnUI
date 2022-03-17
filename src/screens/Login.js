@@ -14,6 +14,8 @@ import {EllipseIcon, LockIcon, MailIcon, VectorIcon} from '../../assets/svgs';
 import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
 import Button from '../component/Button';
 import Input from '../component/Input';
+import BGComp from '../hoc/WithBackground';
+import WithBackground from '../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -90,71 +92,68 @@ export default function Login({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/BG.png')}
-        style={styles.bgImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <KeyboardAvoidingView behavior="padding" style={styles.container}>
-            <EllipseIcon style={styles.Logo} />
-            <Text style={styles.AccountLoginTxt}>Account Login</Text>
+    <WithBackground>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+        <View style={{alignItems: 'center'}}>
+          <EllipseIcon style={styles.Logo} />
+          <Text style={styles.AccountLoginTxt}>Account Login</Text>
 
-            <Input
-              Icon={<MailIcon style={styles.emailIcon} />}
-              placeholder="E-Mail address"
-              keyboardType="email-address"
-              onChangeText={value => {
-                setEmail(value);
-              }}
-              onEndEditing={handleValidEmail}
-              isValid={isValidEmail}
-            />
-            <Input
-              Icon={<LockIcon style={styles.LockIcon} />}
-              placeholder="Password"
-              secureTextEntry={visiblePassword}
-              endIcon={<VectorIcon style={styles.eye} />}
-              onChangeText={value => {
-                setPassword(value);
-              }}
-              onEndEditing={handlePassword}
-              isValid={isValidPassword}
-              onPressEye={() => setVisiblePassword(!visiblePassword)}
-            />
-            <TouchableOpacity
-              style={styles.forgotBtn}
-              onPress={forgotPasswordHandler}>
-              <Text style={styles.ForgotText}>Forgot Password?</Text>
-            </TouchableOpacity>
+          <Input
+            Icon={<MailIcon style={styles.emailIcon} />}
+            placeholder="E-Mail address"
+            keyboardType="email-address"
+            onChangeText={value => {
+              setEmail(value);
+            }}
+            onEndEditing={handleValidEmail}
+            isValid={isValidEmail}
+          />
+          <Input
+            Icon={<LockIcon style={styles.LockIcon} />}
+            placeholder="Password"
+            secureTextEntry={visiblePassword}
+            endIcon={<VectorIcon style={styles.eye} />}
+            onChangeText={value => {
+              setPassword(value);
+            }}
+            onEndEditing={handlePassword}
+            isValid={isValidPassword}
+            onPressEye={() => setVisiblePassword(!visiblePassword)}
+          />
+          <TouchableOpacity
+            style={styles.forgotBtn}
+            onPress={forgotPasswordHandler}>
+            <Text style={styles.ForgotText}>Forgot Password?</Text>
+          </TouchableOpacity>
+        </View>
 
-            <Button BtnName="Login" onPress={loginHandler} />
+        <View style={styles.Buttons}>
+          <Button BtnName="Login" onPress={loginHandler} />
 
-            <TouchableOpacity style={styles.SignUp} onPress={SignUpHandler}>
-              <Text style={styles.TextA}>Don't have account?</Text>
-              <Text style={styles.TextB}> Sign Up</Text>
-            </TouchableOpacity>
-          </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+          <TouchableOpacity style={styles.SignUp} onPress={SignUpHandler}>
+            <Text style={styles.TextA}>Don't have account?</Text>
+            <Text style={styles.TextB}> Sign Up</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  Logo: {
+    marginTop: 70,
+    marginBottom: 30,
   },
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    width: windowWidth * 1,
-  },
+
   AccountLoginTxt: {
     color: '#fff',
     fontSize: 20,
-    marginTop: 36,
     marginBottom: 11,
   },
 
@@ -178,6 +177,11 @@ const styles = StyleSheet.create({
   ForgotText: {
     textDecorationLine: 'underline',
     color: '#fff',
+  },
+
+  Buttons: {
+    alignItems: 'center',
+    marginBottom: 80,
   },
 
   SignUp: {

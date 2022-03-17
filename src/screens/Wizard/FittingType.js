@@ -14,6 +14,7 @@ import Button from '../../component/Button';
 import {EllipseIcon} from '../../../assets/svgs';
 import CustomFont from '../../utils/CustomFont';
 import Input from '../../component/Input';
+import WithBackground from '../../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -27,20 +28,18 @@ export default function FittingType({navigation}) {
     navigation.navigate('S2CircleSize');
   };
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../../assets/BG.png')}
-        style={styles.bgImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <ScrollView
-            contentContainerStyle={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <View style={styles.subContainer}>
-              <View style={styles.LogoContainer}>
-                <EllipseIcon style={styles.Logo} />
-              </View>
+    <WithBackground>
+      <ScrollView
+        contentContainerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View style={styles.subContainer}>
+          <View style={styles.LogoContainer}>
+            <EllipseIcon style={styles.Logo} />
+          </View>
+          <View style={{flex: 1}}>
+            <View style={{justifyContent: 'space-between'}}>
               <View style={styles.middContainer}>
                 <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
                   What is your Fitting Type?
@@ -62,6 +61,14 @@ export default function FittingType({navigation}) {
                 btnStyle={{marginTop: 10, marginBottom: 100}}
                 onPress={CircleHandler}
               />
+            </View>
+            <View
+              style={{
+                justifyContent: 'flex-end',
+                flex: 1,
+                alignItems: 'center',
+                marginBottom: 10,
+              }}>
               <TouchableOpacity
                 style={styles.BackBtn}
                 onPress={() => navigation.navigate('Home')}>
@@ -70,33 +77,22 @@ export default function FittingType({navigation}) {
                 </Text>
               </TouchableOpacity>
             </View>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+          </View>
+        </View>
+      </ScrollView>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: windowWidth * 1,
-  },
   subContainer: {
-    // flex: 1,
     alignItems: 'center',
     width: windowWidth * 1,
     height: windowHeight * 1,
     justifyContent: 'center',
   },
   LogoContainer: {
+    marginTop: 30,
     marginBottom: 30,
   },
 
@@ -126,7 +122,6 @@ const styles = StyleSheet.create({
   Buttons: {
     alignItems: 'center',
     justifyContent: 'center',
-    // top: 90,
   },
 
   BackBtn: {

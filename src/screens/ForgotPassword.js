@@ -10,14 +10,12 @@ import {
   Keyboard,
 } from 'react-native';
 import React, {useState} from 'react';
-import {
-  EllipseIcon,
-  MailIcon,
-} from '../../assets/svgs';
+import {EllipseIcon, MailIcon} from '../../assets/svgs';
 import KeyboardAvoidingView from 'react-native/Libraries/Components/Keyboard/KeyboardAvoidingView';
 import SignUp from './SignUp';
 import Button from '../component/Button';
 import Input from '../component/Input';
+import WithBackground from '../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -73,61 +71,51 @@ export default function ForgotPassword({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/BG.png')}
-        style={styles.bgImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <KeyboardAvoidingView behavior="padding" style={styles.container}>
-            <View style={styles.LogoContainer}>
-              <EllipseIcon style={styles.Logo} />
-            </View>
-            <View style={styles.middContainer}>
-              <Text style={styles.ForgotPasswordTxt}>ForgotPassword</Text>
+    <WithBackground>
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+        <View style={{alignItems: 'center'}}>
+          <EllipseIcon style={styles.LogoContainer} />
+          <View style={styles.middContainer}>
+            <Text style={styles.ForgotPasswordTxt}>ForgotPassword</Text>
 
-              <Input
-                Icon={<MailIcon style={styles.emailIcon} />}
-                placeholder="E-Mail address"
-                keyboardType="email-address"
-                onChangeText={value => setEmail(value)}
-                onEndEditing={handleValidEmail}
-                isValid={isValidEmail}
-              />
-            </View>
-            <View style={styles.buttons}>
-              <Button BtnName="Reset Password" onPress={resetPasswordHandler} />
+            <Input
+              Icon={<MailIcon style={styles.emailIcon} />}
+              placeholder="E-Mail address"
+              keyboardType="email-address"
+              onChangeText={value => setEmail(value)}
+              onEndEditing={handleValidEmail}
+              isValid={isValidEmail}
+            />
+          </View>
+        </View>
 
-              <TouchableOpacity style={styles.SignUp} onPress={SignUpHandler}>
-                <Text style={styles.TextA}>Don't have account?</Text>
-                <Text style={styles.TextB}> Sign Up</Text>
-              </TouchableOpacity>
-            </View>
-          </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+        <View style={styles.buttons}>
+          <Button BtnName="Reset Password" onPress={resetPasswordHandler} />
+
+          <TouchableOpacity style={styles.SignUp} onPress={SignUpHandler}>
+            <Text style={styles.TextA}>Don't have account?</Text>
+            <Text style={styles.TextB}> Sign Up</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    width: windowWidth * 1,
-  },
   LogoContainer: {
+    marginTop: 50,
     marginBottom: 30,
   },
 
   middContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 30,
   },
   ForgotPasswordTxt: {
     color: '#fff',
@@ -141,8 +129,8 @@ const styles = StyleSheet.create({
   },
 
   buttons: {
-    marginTop: '20%',
     alignItems: 'center',
+    marginBottom: 80,
   },
 
   SignUp: {

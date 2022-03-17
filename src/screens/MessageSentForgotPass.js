@@ -1,16 +1,9 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import React, {useState} from 'react';
-import {
-  EllipseIcon,
-} from '../../assets/svgs';
+import {EllipseIcon} from '../../assets/svgs';
 import CustomFont from '../utils/CustomFont';
 import Button from '../component/Button';
+import WithBackground from '../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -21,14 +14,10 @@ export default function MessageSentForgotPass({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../assets/BG.png')}
-        style={styles.bgImage}>
-        <View style={styles.subContainer}>
-          <View style={styles.LogoContainer}>
-            <EllipseIcon style={styles.Logo} />
-          </View>
+    <WithBackground>
+      <View style={styles.subContainer}>
+        <View style={{alignItems: 'center'}}>
+          <EllipseIcon style={styles.LogoContainer} />
           <View style={styles.middContainer}>
             <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
               CONGRATULATIONS!
@@ -42,32 +31,23 @@ export default function MessageSentForgotPass({navigation}) {
               </Text>
             </View>
           </View>
-          <View style={styles.buttons}>
-            <Button BtnName="OK" onPress={OKHandler} />
-          </View>
         </View>
-      </ImageBackground>
-    </View>
+        <View style={styles.buttons}>
+          <Button BtnName="OK" onPress={OKHandler} />
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: windowWidth * 1,
-  },
   subContainer: {
+    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
   LogoContainer: {
+    marginTop: 50,
     marginBottom: 30,
   },
 
@@ -91,6 +71,7 @@ const styles = StyleSheet.create({
   },
 
   buttons: {
-    marginTop: '20%',
+    alignItems: 'center',
+    marginBottom: 80,
   },
 });

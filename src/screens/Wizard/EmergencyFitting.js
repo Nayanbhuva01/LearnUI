@@ -14,6 +14,7 @@ import Button from '../../component/Button';
 import {EllipseIcon} from '../../../assets/svgs';
 import CustomFont from '../../utils/CustomFont';
 import Input from '../../component/Input';
+import WithBackground from '../../hoc/WithBackground';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -24,76 +25,54 @@ export default function EmergencyFitting({navigation}) {
   };
 
   return (
-    <View style={styles.container}>
-      <ImageBackground
-        source={require('../../../assets/BG.png')}
-        style={styles.bgImage}>
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-          <ScrollView
-            contentContainerStyle={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <View style={styles.subContainer}>
-              <View style={styles.LogoContainer}>
-                <EllipseIcon style={styles.Logo} />
-              </View>
-              <View style={styles.middContainer}>
-                <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
-                  Is that an Emergency Fitting?
-                </Text>
-                <View style={styles.messageContainer}>
-                  <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
-                    Please select an option
-                  </Text>
-                </View>
-              </View>
-
-              <Button
-                btnStyle={{marginTop: 20}}
-                BtnName="Yes"
-                onPress={BtnHandler}
-              />
-              <Button
-                BtnName="No"
-                btnStyle={{marginTop: 10, marginBottom: 100}}
-                onPress={BtnHandler}
-              />
-              <TouchableOpacity
-                style={styles.BackBtn}
-                onPress={() => navigation.goBack()}>
-                <Text style={[styles.BackTxt, CustomFont.Roboto_Reg]}>
-                  Back
-                </Text>
-              </TouchableOpacity>
+    <WithBackground>
+      <View style={styles.subContainer}>
+        <View style={{alignItems: 'center'}}>
+          <View style={styles.LogoContainer}>
+            <EllipseIcon style={styles.Logo} />
+          </View>
+          <View style={styles.middContainer}>
+            <Text style={[styles.CongratulationTxt, CustomFont.Roboto_Bol]}>
+              Is that an Emergency Fitting?
+            </Text>
+            <View style={styles.messageContainer}>
+              <Text style={[styles.messageTxt, CustomFont.Roboto_Reg]}>
+                Please select an option
+              </Text>
             </View>
-          </ScrollView>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
-    </View>
+          </View>
+
+          <Button
+            btnStyle={{marginTop: 20}}
+            BtnName="Yes"
+            onPress={BtnHandler}
+          />
+          <Button
+            BtnName="No"
+            btnStyle={{marginTop: 10, marginBottom: 100}}
+            onPress={BtnHandler}
+          />
+        </View>
+        <View style={styles.Buttons}>
+          <TouchableOpacity
+            style={styles.BackBtn}
+            onPress={() => navigation.goBack()}>
+            <Text style={[styles.BackTxt, CustomFont.Roboto_Reg]}>Back</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </WithBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  bgImage: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: windowWidth * 1,
-  },
   subContainer: {
-    // flex: 1,
+    flex: 1,
     alignItems: 'center',
-    width: windowWidth * 1,
-    height: windowHeight * 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
   LogoContainer: {
+    marginTop: 30,
     marginBottom: 30,
   },
 
@@ -122,8 +101,7 @@ const styles = StyleSheet.create({
 
   Buttons: {
     alignItems: 'center',
-    justifyContent: 'center',
-    // top: 90,
+    marginBottom: 30,
   },
 
   BackBtn: {
